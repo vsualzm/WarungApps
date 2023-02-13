@@ -75,8 +75,6 @@ public class UserController {
     }
 
 
-
-
     @GET
     @Path("/{id}")
     @Operation(summary = "Get User By Id")
