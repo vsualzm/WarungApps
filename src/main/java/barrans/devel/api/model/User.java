@@ -13,8 +13,7 @@ import javax.validation.constraints.Size;
 import java.util.Date;
 
 @Entity
-@Table(name = "users", indexes = {
-        @Index(name = "user_id", columnList = "email, mobile_phone_number")},
+@Table(name = "users",
         uniqueConstraints = {
                 @UniqueConstraint(name = "unique_email", columnNames = {"email"})
         })
