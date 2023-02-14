@@ -1,21 +1,43 @@
 package barrans.devel.api.api.dto;
 
-import org.eclipse.microprofile.openapi.annotations.media.Schema;
+import io.quarkus.runtime.annotations.RegisterForReflection;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.util.Date;
 
 
+@RegisterForReflection
 public class UserDTO {
+    private final Integer id;
 
-    @Schema(required = true, example = "john doe")
-    public String username;
+    private final String name;
 
-    @Schema(required = true, example = "johndoe@gmail.com")
-    public String email;
+    private final Date birthDate;
 
-    @Schema(required = true, example = "082115294399")
-    public String mobile_phone_number;
+    private final String email;
 
+    public UserDTO(Integer id, String name, Date birthDate, String email) {
+        this.id = id;
+        this.name = name;
+        this.birthDate = birthDate;
+        this.email = email;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public Date getBirthDate() {
+        return birthDate;
+    }
+
+    public String getEmail() {
+        return email;
+    }
 }
