@@ -23,8 +23,8 @@ public class TransactionDetail extends PanacheEntityBase {
     @GeneratedValue(strategy = GenerationType.SEQUENCE,generator = "transdetailSequence")
     @Column(name = "id", nullable = false)
     public Long id;
-    @Column(name = "product_id",nullable = false)
-    public Integer product_id;
+    @ManyToOne
+    public Product product_id;
     @Column(name = "product_name",nullable = false)
     public Character product_name;
 
