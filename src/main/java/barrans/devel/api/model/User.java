@@ -59,6 +59,7 @@ public class User extends PanacheEntityBase {
     public String password;
 
     @NotNull
+    @Column(length = 1)
     public Integer role_id;
 
     @NotNull
