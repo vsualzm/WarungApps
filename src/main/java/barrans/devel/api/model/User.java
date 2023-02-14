@@ -1,8 +1,6 @@
 package barrans.devel.api.model;
 
 
-
-import io.quarkus.hibernate.orm.panache.PanacheEntity;
 import io.quarkus.hibernate.orm.panache.PanacheEntityBase;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
@@ -14,13 +12,10 @@ import javax.validation.constraints.Size;
 import java.util.Date;
 
 @Entity
-@Table(name = "table_user", indexes = {
-        @Index(name = "idx_user", columnList = "email, mobile_phone_number")
-}, uniqueConstraints = {
-        @UniqueConstraint(name = "unique_mobile_phone_number", columnNames = {"mobile_phone_number"}),
-        @UniqueConstraint(name = "unique_email", columnNames = {"email"})
-
-})
+@Table(name = "users",
+        uniqueConstraints = {
+                @UniqueConstraint(name = "unique_email", columnNames = {"email"})
+        })
 public class User extends PanacheEntityBase {
 
     @Id
@@ -34,22 +29,39 @@ public class User extends PanacheEntityBase {
             strategy = GenerationType.SEQUENCE,
             generator = "userSequence"
     )
-    @Column(name = "id", nullable = false)
-    public Long id;
+    @Column(name = "user_id", nullable = false)
+    public Integer id;
 
     @NotNull
-    @Size(min = 3,max = 100)
-    public String username;
+    @Size(min = 3)
+    @Column(length = 50)
+    public String name;
 
     @NotNull
-    @Size(min = 3,max = 100)
+    @Size(min = 3)
+    @Column(name = "birth_place", length = 30)
+    public String birthPlace;
+
+    @NotNull
+    @Column(name = "birth_date")
+    public Date birthDate;
+
+    @NotNull
     @Email
+    @Size(min = 3)
+    @Column(length = 50)
     public String email;
 
     @NotNull
-    public String mobile_phone_number;
+    @Column(length = 50, columnDefinition = "varchar(50) default 'rahasia345'")
+    public String password;
 
-    @Column(name = "status")
+    @NotNull
+    @Column(length = 1,name = "role_id")
+    public Integer roleId;
+
+    @NotNull
+    @Column(length = 1, name = "status")
     public int status;
 
     @CreationTimestamp
