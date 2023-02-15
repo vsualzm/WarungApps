@@ -1,5 +1,6 @@
 package barrans.devel.api.model;
 
+import io.quarkus.hibernate.orm.panache.PanacheEntityBase;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
@@ -9,7 +10,7 @@ import java.util.Date;
 
 @Entity
 @Table(name = "inventory")
-public class Inventory {
+public class Inventory extends PanacheEntityBase{
 
     @Id
     @GeneratedValue(
@@ -34,8 +35,9 @@ public class Inventory {
     @Column(name = "product_quantity")
     public Long productQuantity;
 
-    @Column(name = "product_stock")
+    @Column(name = "total_product_stock")
     public Long totalProductStock;
+
 
     @NotNull
     @Column(name = "purchase_date")
