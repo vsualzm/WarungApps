@@ -50,7 +50,7 @@ public class Product {
 
     @NotNull
     @Column(name = "price")
-    public Integer price;
+    public Double price;
 
     @OneToOne
     ProductUnit productUnit;
