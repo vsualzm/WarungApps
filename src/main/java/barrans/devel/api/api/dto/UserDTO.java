@@ -11,7 +11,7 @@ import java.util.Date;
 
 @RegisterForReflection
 public class UserDTO {
-    private final Integer id;
+    private final Long id;
 
     private final String name;
 
@@ -19,14 +19,14 @@ public class UserDTO {
 
     private final String email;
 
-    public UserDTO(Integer id, String name, LocalDate birthDate, String email) {
+    public UserDTO(Long id, String name, LocalDate birthDate, String email) {
         this.id = id;
         this.name = name;
         this.birthDate = birthDate;
         this.email = email;
     }
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
@@ -34,7 +34,7 @@ public class UserDTO {
         return name;
     }
 
-    public Date getBirthDate() {
+    public LocalDate getBirthDate() {
         return birthDate;
     }
 
