@@ -1,7 +1,9 @@
 package barrans.devel.api.service;
 
+import barrans.devel.api.api.dto.UserDTO;
 import barrans.devel.api.model.User;
 import barrans.devel.api.repository.UserRepository;
+import io.quarkus.hibernate.orm.panache.PanacheQuery;
 import io.vertx.core.json.JsonObject;
 
 import javax.enterprise.context.ApplicationScoped;
@@ -15,6 +17,7 @@ public class UserService {
 
     @Inject
     UserRepository userRepository;
+
     @Transactional
     public User persistUser(@Valid User user) {
         user.persist();
@@ -22,9 +25,9 @@ public class UserService {
     }
 
 
-    public List<User> getListAll(){
-        List<User> users = userRepository.findAll().list();
-        return users;
+    public List<UserDTO> getListAll() {
+        PanacheQuery<UserDTO> result = userRepository.find("Select a.user_id, a.name, a.birthDate, a.email from User a where a.status = 1").project(UserDTO.class);
+        return result.list();
     }
 
     public User findUserById(Long id) {
@@ -32,17 +35,13 @@ public class UserService {
     }
 
     @Transactional
-    public void deleteUser(Long id){
+    public void deleteUser(Long id) {
         User user = userRepository.findById(id);
         user.delete();
     }
 
     @Transactional
-    public void updateUser(Long id, JsonObject params){
-        User user = userRepository.findById(id);
-        user.email = params.getString("email");
-        user.username = params.getString("username");
-        user.mobile_phone_number = params.getString("mobile_phone_number");
-        userRepository.persist(user);
+    public void updateUser(Long id, JsonObject params) {
+
     }
 }

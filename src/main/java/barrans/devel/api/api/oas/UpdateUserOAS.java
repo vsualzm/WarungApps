@@ -4,9 +4,9 @@ import barrans.devel.api.api.dto.UserDTO;
 import org.eclipse.microprofile.openapi.annotations.media.Schema;
 
 public class UpdateUserOAS {
-    @Schema(name = "UpdateUserOAS.Request")
-    public class Request extends UserDTO {
-    }
+//    @Schema(name = "UpdateUserOAS.Request")
+//    public class Request extends UserDTO {
+//    }
 
     @Schema(name = "UpdateUserOAS.Response")
     public class Response {

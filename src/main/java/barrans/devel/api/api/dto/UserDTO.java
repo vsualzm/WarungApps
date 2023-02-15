@@ -5,6 +5,7 @@ import io.quarkus.runtime.annotations.RegisterForReflection;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.time.LocalDate;
 import java.util.Date;
 
 
@@ -14,11 +15,11 @@ public class UserDTO {
 
     private final String name;
 
-    private final Date birthDate;
+    private final LocalDate birthDate;
 
     private final String email;
 
-    public UserDTO(Integer id, String name, Date birthDate, String email) {
+    public UserDTO(Integer id, String name, LocalDate birthDate, String email) {
         this.id = id;
         this.name = name;
         this.birthDate = birthDate;

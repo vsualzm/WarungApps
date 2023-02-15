@@ -10,6 +10,7 @@ import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.time.LocalDate;
 import java.util.Date;
 
 @Entity
@@ -31,7 +32,7 @@ public class User extends PanacheEntityBase {
             generator = "userSequence"
     )
     @Column(name = "user_id", nullable = false)
-    public Integer id;
+    public Long id;
 
     @NotNull
     @Size(min = 3)
@@ -45,7 +46,7 @@ public class User extends PanacheEntityBase {
 
     @NotNull
     @Column(name = "birth_date")
-    public Date birthDate;
+    public LocalDate birthDate;
 
     @NotNull
     @Email
@@ -58,16 +59,16 @@ public class User extends PanacheEntityBase {
     public String password;
 
     @NotNull
-    @Column(length = 1)
-    public Integer role_id;
+    @Column(length = 1,name = "role_id")
+    public Integer roleId;
 
     @NotNull
     @Column(length = 1, name = "status")
-    public int status;
+    public Integer status;
 
     @CreationTimestamp
     @Column(name = "created_date", nullable = false)
-    public Date createdDate;
+    public LocalDate createdDate;
 
     @Column(name = "created_by")
     public String createdBy;
@@ -77,5 +78,5 @@ public class User extends PanacheEntityBase {
 
     @UpdateTimestamp
     @Column(name = "updated_date")
-    public Date updatedDate;
+    public LocalDate updatedDate;
 }
