@@ -40,13 +40,6 @@ public class UserController {
         return Response.noContent().build();
     }
 
-    @PUT
-    @Path("/{id}")
-    public Response updateUser(@RestPath Long id, JsonObject params) {
-        userService.updateUser(id, params);
-        return Response.noContent().build();
-    }
-
     @GET
     public Response getUserAll(@QueryParam("status")
                                @NotNull Integer id,

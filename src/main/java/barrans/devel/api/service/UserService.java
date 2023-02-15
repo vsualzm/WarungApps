@@ -49,8 +49,9 @@ public class UserService {
 
     @Transactional
     public void deleteUser(Long id) {
-        User user = userRepository.findById(id);
-        user.delete();
+       User user = userRepository.findById(id);
+       user.status = 1;
+       userRepository.persist(user);
     }
 
     @Transactional
