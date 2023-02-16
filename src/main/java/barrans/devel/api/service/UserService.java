@@ -11,6 +11,7 @@ import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import javax.transaction.Transactional;
 import javax.validation.Valid;
+import java.time.LocalDate;
 import java.util.*;
 
 @ApplicationScoped
@@ -20,11 +21,20 @@ public class UserService {
     UserRepository userRepository;
 
     @Transactional
-    public User persistUser(@Valid User user) {
-        user.persist();
-        return user;
+    public void addUser(JsonObject params){
+        User user = new User();
+        user.id = null;
+        user.name = params.getString("name");
+        user.birthPlace = params.getString("birth_place");
+        user.birthDate = LocalDate.parse(params.getString("birth_date"));
+        user.password = params.getString("password");
+        user.roleId = params.getInteger("role_id");
+        user.email = params.getString("email");
+        user.status = params.getInteger("status");
+        user.createdBy = params.getString("created_by");
+        user.updatedBy = params.getString("updated_by");
+        userRepository.persist(user);
     }
-
 
     public Map<String, Object> getUserAll(Integer status, Integer index, Integer size) {
         Map<String, Object> result = new LinkedHashMap<>();
@@ -56,6 +66,16 @@ public class UserService {
 
     @Transactional
     public void updateUser(Long id, JsonObject params) {
-
+        User user = userRepository.findById(id);
+        user.name = params.getString("name");
+        user.birthPlace = params.getString("birth_place");
+        user.birthDate = LocalDate.parse(params.getString("birth_date"));
+        user.password = params.getString("password");
+        user.roleId = params.getInteger("role_id");
+        user.email = params.getString("email");
+        user.status = params.getInteger("status");
+        user.createdBy = params.getString("created_by");
+        user.updatedBy = params.getString("updated_by");
+        userRepository.persist(user);
     }
 }

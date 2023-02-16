@@ -33,26 +33,23 @@ public class UserController {
 
     @POST
     public Response addUser(JsonObject params) {
-//        JsonObject result = new JsonObject();
-        User user = new User();
-        user.email = params.getString("email");
-        userService.persistUser(user);
+        userService.addUser(params);
         return Response.noContent().build();
     }
 
     @GET
     public Response getUserAll(@QueryParam("status")
-                               @NotNull Integer id,
+                               @NotNull Integer status,
                                @QueryParam("page")
                                @NotNull Integer page,
                                @QueryParam("size")
                                @NotNull Integer size) {
         JsonObject result = new JsonObject();
-        Map<String, Object> data = userService.getUserAll(id, page, size);
-        boolean status = !((Map) data.get("meta")).get("total").equals(0);
-        result.put("status", status ? "success" : "failed");
-        result.put("data", status ? data : "Not Found");
-        return Response.status(status ? Response.Status.OK : Response.Status.NOT_FOUND)
+        Map<String, Object> data = userService.getUserAll(status, page, size);
+        boolean dataStatus = !((Map) data.get("meta")).get("total").equals(0);
+        result.put("status", dataStatus ? "success" : "failed");
+        result.put("data", dataStatus ? data : "Not Found");
+        return Response.status(dataStatus ? Response.Status.OK : Response.Status.NOT_FOUND)
                 .entity(result)
                 .build();
     }
@@ -66,6 +63,12 @@ public class UserController {
         return Response.ok().entity(result).build();
     }
 
+    @PUT
+    @Path("/{id}")
+    public Response editUser(@RestPath Long id, JsonObject params){
+        userService.updateUser(id, params);
+        return Response.noContent().build();
+    }
 
     @DELETE
     @Path("/{id}")
