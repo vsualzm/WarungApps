@@ -9,9 +9,7 @@ import java.util.Date;
 import java.util.List;
 
 @Entity
-@Table(name = "table_transdetail", indexes = {
-        @Index(name = "idx_transdetail",columnList = "quantity,product_name,price")
-})
+@Table(name = "table_transdetail")
 public class TransactionDetail extends PanacheEntityBase {
     @Id
     @SequenceGenerator(
@@ -23,15 +21,19 @@ public class TransactionDetail extends PanacheEntityBase {
     @GeneratedValue(strategy = GenerationType.SEQUENCE,generator = "transdetailSequence")
     @Column(name = "id", nullable = false)
     public Long id;
+
     @ManyToOne
-    public Product product_id;
+    public Product product;
+
     @Column(name = "product_name",nullable = false)
     public Character product_name;
 
     @Column(name = "price",nullable = false)
     public Integer price;
-    @ManyToOne
+
+    @OneToOne
     public Transaction transaction_id;
+
     @Column(name = "status")
     public Integer status;
 

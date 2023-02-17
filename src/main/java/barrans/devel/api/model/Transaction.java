@@ -8,9 +8,7 @@ import javax.persistence.*;
 import java.util.Date;
 
 @Entity
-@Table(name = "table_transaction", indexes = {
-        @Index(name = "idx_transaction",columnList = "total_price,discount,cash,change")
-})
+@Table(name = "table_transaction")
 public class Transaction extends PanacheEntityBase {
     @Id
     @SequenceGenerator(
@@ -26,16 +24,22 @@ public class Transaction extends PanacheEntityBase {
     @CreationTimestamp
     @Column(name = "transaction_date", nullable = false)
     public Date transaction_date;
+
     @Column(name = "total_price")
     public Integer total_price;
+
     @Column(name = "discount")
     public Integer discount;
+
     @Column(name = "cash", nullable = false)
     public Integer cash;
+
     @Column(name = "change")
     public Integer change;
+
     @Column(name = "status", nullable = false)
     public Integer status;
+
     @CreationTimestamp
     @Column(name = "created_date", nullable = false)
     public Date createdDate;

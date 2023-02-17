@@ -22,22 +22,20 @@ public class Inventory extends PanacheEntityBase{
             initialValue = 1,
             allocationSize = 1
     )
-    public Long inventoryId;
+    public Long id;
 
-    @NotNull
-    @Column(name = "product_id")
-    public Long productId;
+    @ManyToOne
+    public Product product;
 
     @Column(name = "product_stock")
     public Long productStock;
-
+    
     @NotNull
     @Column(name = "product_quantity")
     public Long productQuantity;
 
     @Column(name = "total_product_stock")
     public Long totalProductStock;
-
 
     @NotNull
     @Column(name = "purchase_date")
@@ -48,7 +46,7 @@ public class Inventory extends PanacheEntityBase{
     public Long purchasePrice;
 
     @NotNull
-    public int status;
+    public Boolean status;
 
     @NotNull
     @Column(name = "created_by")
