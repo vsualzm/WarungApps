@@ -9,7 +9,7 @@ import java.util.Date;
 import java.util.List;
 
 @Entity
-@Table(name = "table_transdetail")
+@Table(name = "transdetail")
 public class TransactionDetail extends PanacheEntityBase {
     @Id
     @SequenceGenerator(

@@ -8,7 +8,7 @@ import javax.persistence.*;
 import java.util.Date;
 
 @Entity
-@Table(name = "table_transaction")
+@Table(name = "transaction")
 public class Transaction extends PanacheEntityBase {
     @Id
     @SequenceGenerator(
@@ -17,8 +17,8 @@ public class Transaction extends PanacheEntityBase {
             allocationSize = 1,
             initialValue = 1
     )
-    @GeneratedValue(strategy = GenerationType.SEQUENCE,generator = "transactionSequence")
-    @Column(name = "id",nullable = false)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "transactionSequence")
+    @Column(name = "transaction_id", nullable = false)
     public Long id;
 
     @CreationTimestamp
