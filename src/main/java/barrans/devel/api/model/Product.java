@@ -1,5 +1,6 @@
 package barrans.devel.api.model;
 
+import io.quarkus.hibernate.orm.panache.PanacheEntityBase;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
@@ -15,7 +16,7 @@ import java.util.Date;
         @UniqueConstraint(name = "unique_barcode", columnNames = {"barcode"})
 
 })
-public class Product {
+public class Product extends PanacheEntityBase {
     @Id
     @SequenceGenerator(
             name = "productSequence",
@@ -32,9 +33,8 @@ public class Product {
 
 
     @NotNull
-    @Size(min = 3,max = 50)
     @Column(name = "barcode")
-    public Integer barcode;
+    public Long barcode;
 
 
     @NotNull
@@ -53,10 +53,14 @@ public class Product {
     public Double price;
 
     @OneToOne
+    @JoinTable (name = "productunit_product",
+            joinColumns = @JoinColumn(name = "product_id"),
+            inverseJoinColumns = @JoinColumn(name = "productunit_id"))
     ProductUnit productUnit;
 
-    @NotNull
-    @Size(min = 3,max = 50)
+
+    @Lob
+    //@ApiModelProperty(hidden = true)
     @Column(name = "image")
     public String image;
 
